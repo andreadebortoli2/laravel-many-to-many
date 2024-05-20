@@ -30,7 +30,9 @@
                             <td>{{ $project->author }}</td>
                             <th scope="col">
                                 <a href="{{ route('admin.projects.show', $project) }}">show</a>
-                                /edit/delete
+                                /
+                                <a href="{{ route('admin.projects.edit', $project) }}">edit</a>
+                                /delete
                             </th>
                         </tr>
                     @empty

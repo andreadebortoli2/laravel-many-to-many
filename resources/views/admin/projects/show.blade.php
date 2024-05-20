@@ -8,8 +8,8 @@
             </div>
             <div class="col-5 p-4">
                 <div class="actions d-flex justify-content-end pb-4">
-                    <a class="btn btn-secondary me-3" href="{{ url()->previous() }}">Back</a>
-                    <a class="btn btn-primary" href="">Edit</a>
+                    <a class="btn btn-secondary me-3" href="{{ route('admin.projects.index') }}">Back</a>
+                    <a class="btn btn-primary" href="{{ route('admin.projects.edit', $project) }}">Edit</a>
                 </div>
                 <h2>{{ $project->title }}</h2>
                 <h6>{{ $project->author }}</h6>
