@@ -8,7 +8,7 @@
             </div>
             <div class="col-5 p-4">
                 <div class="actions d-flex justify-content-end pb-4">
-                    <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}">Back</a>
+                    <a class="btn btn-secondary" href="{{ url()->previous() }}">Back</a>
                     <a class="btn btn-primary mx-2" href="{{ route('admin.projects.edit', $project) }}">Edit</a>
                     <!-- Modal trigger button -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalId-delete">
