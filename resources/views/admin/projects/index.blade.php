@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="container py-3">
-        <h2>Prortfolio</h2>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Prortfolio</h2>
+            <a class="btn btn-primary" href="{{ route('admin.projects.create') }}">Add a project</a>
+        </div>
 
         <div class="table-responsive">
             <table class="table table-primary">
