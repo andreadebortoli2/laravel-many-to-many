@@ -25,6 +25,8 @@ class StoreProjectRequest extends FormRequest
             'title' => 'required|unique:projects|max:150',
             'image' => 'nullable',
             'author' => 'nullable|max:50',
+            'source_code_url' => 'nullable',
+            'production_site_url' => 'nullable',
             'description' => 'nullable',
         ];
     }

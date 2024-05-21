@@ -4,7 +4,10 @@
     <div class="container py-3">
         <div class="d-flex justify-content-between align-items-center">
             <h2>Prortfolio</h2>
-            <a class="btn btn-primary" href="{{ route('admin.projects.create') }}">Add a project</a>
+            <a class="btn btn-success" href="{{ route('admin.projects.create') }}">
+                <i class="fa-solid fa-plus"></i>
+                Add a new project
+            </a>
         </div>
         @if (session('status'))
             <div class="bg-light my-2 p-3 border border-secondary">{{ session('status') }}</div>
@@ -18,6 +21,8 @@
                         <th scope="col">Image</th>
                         <th scope="col">Title</th>
                         <th scope="col">Author</th>
+                        <th scope="col">Source code url</th>
+                        <th scope="col">Production site url</th>
                         <th scope="col">Actions</th>
 
                     </tr>
@@ -31,13 +36,19 @@
                             </td>
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->author }}</td>
+                            <td>{{ $project->source_code_url }}</td>
+                            <td>{{ $project->production_site_url }}</td>
                             <td scope="col">
-                                <a class="btn btn-primary" href="{{ route('admin.projects.show', $project) }}">show</a>
-                                <a class="btn btn-primary" href="{{ route('admin.projects.edit', $project) }}">edit</a>
+                                <a class="btn btn-warning m-2" href="{{ route('admin.projects.show', $project) }}">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a class="btn btn-primary m-2" href="{{ route('admin.projects.edit', $project) }}">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
                                 <!-- Modal trigger button -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal"
                                     data-bs-target="#modalId-delete">
-                                    delete
+                                    <i class="fa-solid fa-trash"></i>
                                 </button>
 
                                 <!-- Modal Body -->
@@ -58,7 +69,7 @@
                                                 possible to bring it back</div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    Cancel
+                                                    <i class="fa-solid fa-arrow-left"></i>
                                                 </button>
                                                 <form action="{{ route('admin.projects.destroy', $project) }}"
                                                     method="post">
@@ -77,7 +88,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td scope="row" colspan="5">No projects yet</td>
+                            <td scope="row" colspan="7">No projects yet</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -32,6 +32,26 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="" class="form-label">Source code url</label>
+                <input type="text" class="form-control @error('source_code_url') is-invalid @enderror"
+                    name="source_code_url" id="source_code_url" aria-describedby="helpIdSource_code_url"
+                    placeholder="Https://" value="{{ old('source_code_url') }}" />
+                <small id="helpIdSource_code_url" class="form-text text-muted">Insert the source code url</small>
+                @error('source_code_url')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Production site url</label>
+                <input type="text" class="form-control @error('production_site_url') is-invalid @enderror"
+                    name="production_site_url" id="production_site_url" aria-describedby="helpIdProduction_site_url"
+                    placeholder="Https://" value="{{ old('production_site_url') }}" />
+                <small id="helpIdProduction_site_url" class="form-text text-muted">Insert the production site url</small>
+                @error('production_site_url')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="" class="form-label">Image</label>
                 <input type="text" class="form-control @error('image') is-invalid @enderror" name="image"
                     id="image" aria-describedby="helpIdImage" placeholder="Https://" value="{{ old('Image') }}" />
@@ -48,7 +68,9 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <a class="btn btn-secondary" href="{{ url()->previous() }}">Cancel</a>
+            <a class="btn btn-secondary" href="{{ url()->previous() }}">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
             <button type="submit" class="btn btn-primary">
                 Create
             </button>

@@ -8,11 +8,15 @@
             </div>
             <div class="col-5 p-4">
                 <div class="actions d-flex justify-content-end pb-4">
-                    <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}">Back</a>
-                    <a class="btn btn-primary mx-2" href="{{ route('admin.projects.edit', $project) }}">Edit</a>
+                    <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                    <a class="btn btn-primary mx-2" href="{{ route('admin.projects.edit', $project) }}">
+                        <i class="fa-solid fa-pencil"></i>
+                    </a>
                     <!-- Modal trigger button -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalId-delete">
-                        delete
+                        <i class="fa-solid fa-trash"></i>
                     </button>
 
                     <!-- Modal Body -->
@@ -30,7 +34,7 @@
                                     possible to bring it back</div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                        Close
+                                        <i class="fa-solid fa-arrow-left"></i>
                                     </button>
                                     <form action="{{ route('admin.projects.destroy', $project) }}" method="post">
                                         @csrf
@@ -49,7 +53,12 @@
                     <div class="bg-light my-2 p-3 border border-secondary">{{ session('status') }}</div>
                 @endif
                 <h2>{{ $project->title }}</h2>
-                <h6>{{ $project->author }}</h6>
+                <h6>Author: <strong>{{ $project->author }}</strong></h6>
+                <p><strong>Source code:</strong> <a
+                        href="{{ $project->source_code_url }}">{{ $project->source_code_url }}</a></p>
+                <p><strong>Production site:</strong> <a
+                        href="{{ $project->production_site_url }}">{{ $project->production_site_url }}</a>
+                </p>
                 <p>{{ $project->description }}</p>
             </div>
         </div>
