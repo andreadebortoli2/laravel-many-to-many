@@ -6,6 +6,9 @@
             <h2>Prortfolio</h2>
             <a class="btn btn-primary" href="{{ route('admin.projects.create') }}">Add a project</a>
         </div>
+        @if (session('status'))
+            <div class="bg-light my-2 p-3 border border-secondary">{{ session('status') }}</div>
+        @endif
 
         <div class="table-responsive">
             <table class="table table-primary">
@@ -28,7 +31,7 @@
                             </td>
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->author }}</td>
-                            <th scope="col">
+                            <td scope="col">
                                 <a class="btn btn-primary" href="{{ route('admin.projects.show', $project) }}">show</a>
                                 <a class="btn btn-primary" href="{{ route('admin.projects.edit', $project) }}">edit</a>
                                 <!-- Modal trigger button -->
@@ -50,11 +53,12 @@
                                                     DELETING PROJECT
                                                 </h5>
                                             </div>
-                                            <div class="modal-body">You're deleting {{ $project->title }}, it will not be
+                                            <div class="modal-body">You're deleting <span
+                                                    class="text-danger">{{ $project->title }}</span>, it will not be
                                                 possible to bring it back</div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    Close
+                                                    Cancel
                                                 </button>
                                                 <form action="{{ route('admin.projects.destroy', $project) }}"
                                                     method="post">
@@ -63,18 +67,16 @@
                                                     <button type="submit" class="btn btn-danger">
                                                         DELETE
                                                     </button>
-
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                            </th>
+                            </td>
                         </tr>
                     @empty
-
-                        <tr class="">
+                        <tr>
                             <td scope="row" colspan="5">No projects yet</td>
                         </tr>
                     @endforelse

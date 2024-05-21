@@ -37,7 +37,7 @@ class ProjectController extends Controller
 
         Project::create($validated);
 
-        return to_route('admin.projects.index');
+        return to_route('admin.projects.index')->with('status', "$request->title - Project created");
     }
 
     /**
@@ -67,7 +67,7 @@ class ProjectController extends Controller
 
         $project->update($validated);
 
-        return to_route('admin.projects.show', $project);
+        return to_route('admin.projects.show', $project)->with('status', 'Project correctly edited');
     }
 
     /**
@@ -77,6 +77,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return to_route('admin.projects.index');
+        return to_route('admin.projects.index')->with('status', "$project->title - Project deleted");
     }
 }
