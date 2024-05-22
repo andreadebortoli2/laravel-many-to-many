@@ -31,22 +31,29 @@
                     @forelse ($projects as $project)
                         <tr class="">
                             <td scope="row">{{ $project->id }}</td>
-                            <td>
-                                <img width="100" src="{{ $project->image }}" alt="">
-                            </td>
+                            @if (Str::startsWith($project->image, 'http'))
+                                <td>
+                                    <img width="100" src="{{ $project->image }}" alt="{{ $project->title }}">
+                                </td>
+                            @else
+                                <td>
+                                    <img width="100" src="{{ asset('storage/' . $project->image) }}"
+                                        alt="{{ $project->title }}">
+                                </td>
+                            @endif
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->author }}</td>
                             <td>{{ $project->source_code_url }}</td>
                             <td>{{ $project->production_site_url }}</td>
                             <td scope="col">
-                                <a class="btn btn-warning m-2" href="{{ route('admin.projects.show', $project) }}">
+                                <a class="btn btn-warning btn-sm m-2" href="{{ route('admin.projects.show', $project) }}">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <a class="btn btn-primary m-2" href="{{ route('admin.projects.edit', $project) }}">
+                                <a class="btn btn-primary btn-sm m-2" href="{{ route('admin.projects.edit', $project) }}">
                                     <i class="fa-solid fa-pencil"></i>
                                 </a>
                                 <!-- Modal trigger button -->
-                                <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-danger btn-sm m-2" data-bs-toggle="modal"
                                     data-bs-target="#modalId-delete">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>

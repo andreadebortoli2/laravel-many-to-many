@@ -4,7 +4,11 @@
     <div class="container py-3">
         <div class="row">
             <div class="col-7">
-                <img src="{{ $project->image }}" alt="{{ $project->title }}">
+                @if (Str::startsWith($project->image, 'http'))
+                    <img src="{{ $project->image }}" alt="{{ $project->title }}">
+                @else
+                    <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
+                @endif
             </div>
             <div class="col-5 p-4">
                 <div class="actions d-flex justify-content-end pb-4">
