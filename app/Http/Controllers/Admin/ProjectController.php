@@ -70,7 +70,18 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        // validate data
         $validated = $request->all();
+
+        // add image to storage
+        if ($request->has('image'))
+            if ($project->image) {
+                Storage::delete($project->image);
+            }
+        $image = Storage::put('project-images', $request['image']);
+        $validated['image'] = $image;
+
+        // create and add slug
         $slug = Str::slug($request->title, '-');
         $validated['slug'] = $slug;
 
