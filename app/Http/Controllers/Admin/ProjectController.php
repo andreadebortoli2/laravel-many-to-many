@@ -95,6 +95,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // delete image from storage
+        if ($project->image) {
+            Storage::delete($project->image);
+        }
+
         $project->delete();
 
         return to_route('admin.projects.index')->with('status', "$project->title - Project deleted");
