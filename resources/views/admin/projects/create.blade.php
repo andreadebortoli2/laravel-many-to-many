@@ -11,7 +11,7 @@
         </div>
     @endif
     <div class="container py-3">
-        <form action="{{ route('admin.projects.store') }}" method="post">
+        <form action="{{ route('admin.projects.store') }}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="mb-3">
                 <label for="" class="form-label">Title</label>
@@ -53,9 +53,9 @@
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Image</label>
-                <input type="text" class="form-control @error('image') is-invalid @enderror" name="image"
-                    id="image" aria-describedby="helpIdImage" placeholder="Https://" value="{{ old('Image') }}" />
-                <small id="helpIdImage" class="form-text text-muted">Insert the image URL</small>
+                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image"
+                    id="image" aria-describedby="helpIdImage" />
+                <small id="helpIdImage" class="form-text text-muted">Insert the project image</small>
                 @error('image')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
