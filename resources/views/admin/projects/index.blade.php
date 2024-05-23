@@ -20,6 +20,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Image</th>
                         <th scope="col">Title</th>
+                        <th scope="col">Type</th>
                         <th scope="col">Author</th>
                         <th scope="col">Source code url</th>
                         <th scope="col">Production site url</th>
@@ -42,6 +43,7 @@
                                 </td>
                             @endif
                             <td>{{ $project->title }}</td>
+                            <td>{{ $project->type ? $project->type->name : 'None' }}</td>
                             <td>{{ $project->author }}</td>
                             <td>{{ $project->source_code_url }}</td>
                             <td>{{ $project->production_site_url }}</td>

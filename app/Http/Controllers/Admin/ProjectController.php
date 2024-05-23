@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -16,7 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('admin.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)]);
+        $types = Type::all();
+        return view('admin.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)], compact('types'));
     }
 
     /**
@@ -36,9 +38,10 @@ class ProjectController extends Controller
         $validated = $request->validated();
 
         // add image to storage
-        if ($request->has('image'))
+        if ($request->has('image')) {
             $image = Storage::put('project-images', $request['image']);
-        $validated['image'] = $image;
+            $validated['image'] = $image;
+        }
 
         // create and add slug
         $slug = Str::slug($request->title, '-');
@@ -54,7 +57,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.show', compact('project', 'types'));
     }
 
     /**

@@ -58,10 +58,12 @@
                 @endif
                 <h2>{{ $project->title }}</h2>
                 <h6>Author: <strong>{{ $project->author }}</strong></h6>
-                <p><strong>Source code:</strong> <a
+                <p><strong>Source code:</strong> <a class="text-muted"
                         href="{{ $project->source_code_url }}">{{ $project->source_code_url }}</a></p>
-                <p><strong>Production site:</strong> <a
+                <p><strong>Production site:</strong> <a class="text-muted"
                         href="{{ $project->production_site_url }}">{{ $project->production_site_url }}</a>
+                </p>
+                <p><strong>Type:</strong> {{ $project->type->name }}
                 </p>
                 <p>{{ $project->description }}</p>
             </div>
