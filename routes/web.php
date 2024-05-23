@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified'])
 
         // Projects
         Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
+
+        // Types
         Route::resource('types', TypeController::class)->parameters(['types' => 'type:slug']);
     });
 

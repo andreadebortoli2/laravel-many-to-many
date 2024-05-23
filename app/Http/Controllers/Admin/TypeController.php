@@ -54,7 +54,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -62,7 +62,13 @@ class TypeController extends Controller
      */
     public function update(UpdateTypeRequest $request, Type $type)
     {
-        //
+        $validated = $request->validated();
+
+        $validated['slug'] = Str::slug($request->name, '-');
+
+        $type->update($validated);
+
+        return to_route('admin.types.index')->with('status', "$request->name - Type edited");
     }
 
     /**
@@ -70,6 +76,9 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        dd($type);
+        $type->delete();
+
+        return back()->with('status', "$type->name - Type deleted");
     }
 }
