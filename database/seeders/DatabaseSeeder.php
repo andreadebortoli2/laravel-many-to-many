@@ -3,7 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Type;
 use Illuminate\Database\Seeder;
+use Database\Seeders\ProjectSeeder;
+use Database\Seeders\AdminUserSeeder;
+use Database\Seeders\TypeSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +25,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(
-            [ProjectSeeder::class, AdminUserSeeder::class]
+            [ProjectSeeder::class, AdminUserSeeder::class, TypeSeeder::class]
         );
     }
 }
