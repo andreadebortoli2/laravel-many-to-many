@@ -22,13 +22,23 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
+
+    <style>
+        body {
+            background-color: lightsteelblue !important
+        }
+
+        nav {
+            background-color: slategray
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                <div class="logo text-danger fs-1 fw-bolder">
+                <div class="logo text-primary fs-1 fw-bolder">
                     PORTFOLIO MANAGER
                 </div>
                 {{-- config('app.name', 'Laravel') --}}
