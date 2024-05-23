@@ -26,7 +26,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -66,7 +67,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -78,12 +80,13 @@ class ProjectController extends Controller
         $validated = $request->all();
 
         // add image to storage
-        if ($request->has('image'))
+        if ($request->has('image')) {
             if ($project->image) {
                 Storage::delete($project->image);
             }
-        $image = Storage::put('project-images', $request['image']);
-        $validated['image'] = $image;
+            $image = Storage::put('project-images', $request['image']);
+            $validated['image'] = $image;
+        }
 
         // create and add slug
         $slug = Str::slug($request->title, '-');

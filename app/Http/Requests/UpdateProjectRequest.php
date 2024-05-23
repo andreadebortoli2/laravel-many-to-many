@@ -29,6 +29,7 @@ class UpdateProjectRequest extends FormRequest
             'source_code_url' => 'nullable',
             'production_site_url' => 'nullable',
             'description' => 'nullable',
+            'type_id' => 'nullable|exists:types,id'
         ];
     }
 }

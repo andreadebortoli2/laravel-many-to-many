@@ -63,7 +63,7 @@
                 <p><strong>Production site:</strong> <a class="text-muted"
                         href="{{ $project->production_site_url }}">{{ $project->production_site_url }}</a>
                 </p>
-                <p><strong>Type:</strong> {{ $project->type->name }}
+                <p><strong>Type:</strong> {{ $project->type ? $project->type->name : 'None' }}
                 </p>
                 <p>{{ $project->description }}</p>
             </div>

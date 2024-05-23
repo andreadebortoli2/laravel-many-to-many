@@ -32,7 +32,17 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="" class="form-label">Source code url</label>
+                <label for="" class="form-label">Type</label>
+                <select class="form-select form-select-lg" name="type_id" id="type_id">
+                    <option selected disabled>Select type</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}" {{ $type->id == old('type_id') ? 'selected' : '' }}>
+                            {{ $type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="type_id" class="form-label">Source code url</label>
                 <input type="text" class="form-control @error('source_code_url') is-invalid @enderror"
                     name="source_code_url" id="source_code_url" aria-describedby="helpIdSource_code_url"
                     placeholder="Https://" value="{{ old('source_code_url') }}" />
