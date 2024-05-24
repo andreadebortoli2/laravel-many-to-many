@@ -14,7 +14,7 @@
         @endif
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-success">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>

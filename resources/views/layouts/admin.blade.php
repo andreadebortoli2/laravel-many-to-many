@@ -28,8 +28,8 @@
             background-color: lightsteelblue !important
         }
 
-        nav {
-            background-color: slategray
+        .navbar {
+            background-color: teal
         }
     </style>
 </head>
@@ -38,7 +38,7 @@
     <nav class="navbar navbar-expand-md navbar-light shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                <div class="logo text-primary fs-1 fw-bolder">
+                <div class="logo text-info fs-1 fw-bolder">
                     PORTFOLIO MANAGER
                 </div>
                 {{-- config('app.name', 'Laravel') --}}
