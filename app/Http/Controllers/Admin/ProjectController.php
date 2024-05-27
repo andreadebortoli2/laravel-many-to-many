@@ -124,6 +124,11 @@ class ProjectController extends Controller
             Storage::delete($project->image);
         }
 
+        // syncronize connections to technologies pivot teable
+        if ($project->has('technologies')) {
+            $project->technologies()->detach();
+        };
+
         $project->delete();
 
         return to_route('admin.projects.index')->with('status', "$project->title - Project deleted");
