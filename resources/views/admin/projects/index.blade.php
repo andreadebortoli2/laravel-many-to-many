@@ -21,9 +21,8 @@
                         <th scope="col">Image</th>
                         <th scope="col">Title</th>
                         <th scope="col">Type</th>
+                        <th scope="col">Technologies</th>
                         <th scope="col">Author</th>
-                        <th scope="col">Source code url</th>
-                        <th scope="col">Production site url</th>
                         <th scope="col">Actions</th>
 
                     </tr>
@@ -44,9 +43,17 @@
                             @endif
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->type ? $project->type->name : 'None' }}</td>
+                            <td>
+                                @if (count($project->technologies) == 0)
+                                    None
+                                @else
+                                    @foreach ($project->technologies as $tech)
+                                        {{ $tech['name'] }}
+                                    @endforeach
+                                @endif
+                            </td>
                             <td>{{ $project->author }}</td>
-                            <td>{{ $project->source_code_url }}</td>
-                            <td>{{ $project->production_site_url }}</td>
+
                             <td scope="col">
                                 <a class="btn btn-warning btn-sm m-2" href="{{ route('admin.projects.show', $project) }}">
                                     <i class="fa-solid fa-eye"></i>

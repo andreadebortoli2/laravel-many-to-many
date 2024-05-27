@@ -65,6 +65,15 @@
                 </p>
                 <p><strong>Type:</strong> {{ $project->type ? $project->type->name : 'None' }}
                 </p>
+                <p><strong>Technologies:</strong>
+                    @if (count($project->technologies) == 0)
+                        None
+                    @else
+                        @foreach ($project->technologies as $tech)
+                            {{ $tech['name'] }}
+                        @endforeach
+                    @endif
+                </p>
                 <p>{{ $project->description }}</p>
             </div>
         </div>
