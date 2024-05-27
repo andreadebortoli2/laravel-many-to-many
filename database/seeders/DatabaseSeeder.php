@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\ProjectSeeder;
 use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\TypeSeeder;
+use App\Models\Technology;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(
-            [TypeSeeder::class, ProjectSeeder::class, AdminUserSeeder::class]
+            [TypeSeeder::class, TechnologySeeder::class, ProjectSeeder::class, AdminUserSeeder::class]
         );
     }
 }
