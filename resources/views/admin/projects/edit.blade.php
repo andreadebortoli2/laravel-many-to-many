@@ -44,7 +44,40 @@
                     @endforeach
                 </select>
             </div>
-
+            <div class="mb-3">
+                @if ($errors->any())
+                    <label for="technologies" class="form-label">Technologies</label>
+                    <select multiple class="form-select form-select-lg" name="technologies[]" id="technologies">
+                        <option {{ count($projectTechnologiesId) == 0 ? 'selected' : '' }}>To select technologies hold CTRL
+                            and
+                            click on them
+                        </option>
+                        @foreach ($technologies as $tech)
+                            <option value="{{ $tech->id }}"
+                                {{ in_array($tech->id, old('technologies')) ? 'selected' : '' }}>
+                                {{ $tech->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                @else
+                    <label for="technologies" class="form-label">Technologies</label>
+                    <select multiple class="form-select form-select-lg" name="technologies[]" id="technologies">
+                        <option {{ count($projectTechnologiesId) == 0 ? 'selected' : '' }}>To select technologies hold CTRL
+                            and
+                            click on them
+                        </option>
+                        @foreach ($technologies as $tech)
+                            <option value="{{ $tech->id }}"
+                                {{ in_array($tech->id, old('technologies', $projectTechnologiesId)) ? 'selected' : '' }}>
+                                {{ $tech->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                @endif
+                @error('technologies')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="mb-3">
                 <label for="" class="form-label">Source code url</label>
                 <input type="text" class="form-control @error('source_code_url') is-invalid @enderror"

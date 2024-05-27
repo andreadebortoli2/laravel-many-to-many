@@ -75,7 +75,12 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        $projectTechnologiesId = [];
+        foreach ($project->technologies as $tech) {
+            array_push($projectTechnologiesId, $tech->id);
+        };
+        return view('admin.projects.edit', compact('project', 'types', 'technologies', 'projectTechnologiesId'));
     }
 
     /**
@@ -100,6 +105,11 @@ class ProjectController extends Controller
         $validated['slug'] = $slug;
 
         $project->update($validated);
+
+        // syncronize connections to technologies pivot teable
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($validated['technologies']);
+        };
 
         return to_route('admin.projects.show', $project)->with('status', 'Project correctly edited');
     }
