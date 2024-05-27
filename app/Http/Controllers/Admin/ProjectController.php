@@ -19,8 +19,7 @@ class ProjectController extends Controller
     public function index()
     {
         $types = Type::all();
-        $technologies = Technology::all();
-        return view('admin.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)], compact('types', 'technologies'));
+        return view('admin.projects.index', ['projects' => Project::orderByDesc('id')->paginate(8)], compact('types'));
     }
 
     /**
@@ -51,7 +50,12 @@ class ProjectController extends Controller
         $slug = Str::slug($request->title, '-');
         $validated['slug'] = $slug;
 
-        Project::create($validated);
+        $project = Project::create($validated);
+
+        // add connection to technologies pivot table
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($validated['technologies']);
+        };
 
         return to_route('admin.projects.index')->with('status', "$request->title - Project created");
     }

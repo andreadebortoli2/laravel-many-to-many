@@ -34,12 +34,26 @@
             <div class="mb-3">
                 <label for="" class="form-label">Type</label>
                 <select class="form-select form-select-lg" name="type_id" id="type_id">
-                    <option selected disabled>Select type</option>
+                    <option selected disabled>Select the project type</option>
                     @foreach ($types as $type)
                         <option value="{{ $type->id }}" {{ $type->id == old('type_id') ? 'selected' : '' }}>
                             {{ $type->name }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="technologies" class="form-label">Technologies</label>
+                <select multiple class="form-select form-select-lg" name="technologies[]" id="technologies">
+                    <option selected disabled>To select technologies hold CTRL and click on them</option>
+                    @foreach ($technologies as $tech)
+                        <option value="{{ $tech->id }}"
+                            {{ in_array($tech->id, old('technologies', [])) ? 'selected' : '' }}>
+                            {{ $tech->name }}</option>
+                    @endforeach
+                </select>
+                @error('technologies')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="type_id" class="form-label">Source code url</label>
