@@ -76,7 +76,6 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        dd($type);
         $type->delete();
 
         return back()->with('status', "$type->name - Type deleted");

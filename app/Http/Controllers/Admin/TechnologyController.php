@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Technology;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
+use Illuminate\Support\Str;
+
 
 class TechnologyController extends Controller
 {
@@ -13,7 +16,7 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.technologies.index', ['technologies' => Technology::paginate()]);
     }
 
     /**
@@ -21,7 +24,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create');
     }
 
     /**
@@ -29,7 +32,14 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $slug = Str::slug($request->name, '-');
+        $validated['slug'] = $slug;
+
+        Technology::create($validated);
+
+        return to_route('admin.technologies.index')->with('status', "$request->name - Technology created");
     }
 
     /**
@@ -45,7 +55,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view('admin.technologies.edit', compact('technology'));
     }
 
     /**
@@ -53,7 +63,14 @@ class TechnologyController extends Controller
      */
     public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
-        //
+        $validated = $request->validated();
+
+        $slug = Str::slug($request->name, '-');
+        $validated['slug'] = $slug;
+
+        $technology->update($validated);
+
+        return to_route('admin.technologies.index')->with('status', "$request->name - Technology edited");
     }
 
     /**
@@ -61,6 +78,8 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+
+        return back()->with('status', "$technology->name - Technology deleted");
     }
 }
