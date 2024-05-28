@@ -24,7 +24,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        return view('admin.types.create');
+        //
     }
 
     /**
@@ -54,7 +54,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        return view('admin.types.edit', compact('type'));
+        //
     }
 
     /**
@@ -68,7 +68,7 @@ class TypeController extends Controller
 
         $type->update($validated);
 
-        return to_route('admin.types.index')->with('status', "$request->name - Type edited");
+        return to_route('admin.types.index')->with('status', "$request->name - Type successfully edited");
     }
 
     /**
