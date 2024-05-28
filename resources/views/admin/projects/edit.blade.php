@@ -48,7 +48,7 @@
                 @if ($errors->any())
                     <label for="technologies" class="form-label">Technologies</label>
                     <select multiple class="form-select form-select-lg" name="technologies[]" id="technologies">
-                        <option {{ count($projectTechnologiesId) == 0 ? 'selected' : '' }}>To select technologies hold CTRL
+                        <option {{ count($project->technologies) == 0 ? 'selected' : '' }}>To select technologies hold CTRL
                             and
                             click on them
                         </option>
@@ -62,13 +62,13 @@
                 @else
                     <label for="technologies" class="form-label">Technologies</label>
                     <select multiple class="form-select form-select-lg" name="technologies[]" id="technologies">
-                        <option {{ count($projectTechnologiesId) == 0 ? 'selected' : '' }}>To select technologies hold CTRL
+                        <option {{ count($project->technologies) == 0 ? 'selected' : '' }}>To select technologies hold CTRL
                             and
                             click on them
                         </option>
                         @foreach ($technologies as $tech)
                             <option value="{{ $tech->id }}"
-                                {{ in_array($tech->id, old('technologies', $projectTechnologiesId)) ? 'selected' : '' }}>
+                                {{ $project->technologies->contains($technologies) ? 'selected' : '' }}>
                                 {{ $tech->name }}
                             </option>
                         @endforeach

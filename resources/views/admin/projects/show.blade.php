@@ -58,22 +58,27 @@
                 @endif
                 <h2>{{ $project->title }}</h2>
                 <h6>Author: <strong>{{ $project->author }}</strong></h6>
-                <p><strong>Source code:</strong> <a class="text-muted"
-                        href="{{ $project->source_code_url }}">{{ $project->source_code_url }}</a></p>
-                <p><strong>Production site:</strong> <a class="text-muted"
+                <div class="metadata"><strong>Source code:</strong> <a class="text-muted"
+                        href="{{ $project->source_code_url }}">{{ $project->source_code_url }}</a>
+                    <br>
+                    <strong>Production site:</strong> <a class="text-muted"
                         href="{{ $project->production_site_url }}">{{ $project->production_site_url }}</a>
-                </p>
-                <p><strong>Type:</strong> {{ $project->type ? $project->type->name : 'None' }}
-                </p>
-                <p><strong>Technologies:</strong>
+                    <br>
+                    <strong>Type:</strong> {{ $project->type ? $project->type->name : 'None' }}
+                    <br>
+                    <strong>Technologies:</strong>
                     @if (count($project->technologies) == 0)
                         None
                     @else
                         @foreach ($project->technologies as $tech)
-                            {{ $tech['name'] }}
+                            @if ($tech->id === last($project->technologies->toArray())['id'])
+                                {{ $tech->name }}
+                            @else
+                                {{ $tech->name }},
+                            @endif
                         @endforeach
                     @endif
-                </p>
+                </div>
                 <p>{{ $project->description }}</p>
             </div>
         </div>

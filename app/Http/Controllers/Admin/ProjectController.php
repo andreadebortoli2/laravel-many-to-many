@@ -76,11 +76,7 @@ class ProjectController extends Controller
     {
         $types = Type::all();
         $technologies = Technology::all();
-        $projectTechnologiesId = [];
-        foreach ($project->technologies as $tech) {
-            array_push($projectTechnologiesId, $tech->id);
-        };
-        return view('admin.projects.edit', compact('project', 'types', 'technologies', 'projectTechnologiesId'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -109,6 +105,8 @@ class ProjectController extends Controller
         // syncronize connections to technologies pivot teable
         if ($request->has('technologies')) {
             $project->technologies()->sync($validated['technologies']);
+        } else {
+            $project->technologies()->sync([]);
         };
 
         return to_route('admin.projects.show', $project)->with('status', 'Project correctly edited');
@@ -123,11 +121,6 @@ class ProjectController extends Controller
         if ($project->image) {
             Storage::delete($project->image);
         }
-
-        // syncronize connections to technologies pivot teable
-        if ($project->has('technologies')) {
-            $project->technologies()->detach();
-        };
 
         $project->delete();
 
